@@ -1,0 +1,112 @@
+Daily Summaries
+summaryid =>每一筆資料都不一樣的ID
+calendarDate=>日期(資料裡好像沒有)
+startTimeInSeconds=>活動開始時間(1970/1/1/00:00:00UTC)
+startTimeOffsetInSeconds=>加到startTimeInSeconds變成本地時間
+activityType=>都是walk可忽略
+durationInSeconds=>監控週期(時間)86400為一天的秒數
+steps=>步數
+distanceinMeters=>移動距離以公尺為單位
+activeTimeInSeconds=>被認為是活躍的時間(秒)
+activeKilocalories=>通過實際運動燃燒的卡路里
+bmrKilocalories=>用戶基礎代謝率(千卡)
+consumedCalories=>用戶通過以下方式消耗的卡路里數量(表裡面沒看到)
+moderateIntensityDurationInSeconds=>中等強度活動累積的時間
+vigorousIntrnsityDurationInSeconds=>劇烈活動累積持續的時間
+floorsClimbed=>爬樓梯:)
+minHeartRateInBeatsPerMinute=>監測時間心率的最小值
+averageHeartRateInBeatsPerMinute=>過去七天心率的平均值(根據timeOffsetHeartRateSamples計算)
+maxHeartRateInBeatsPerMinute=>監測時間心率的最大值
+restingHeartRateInbeatsPerMinute=>休息時的平均心率
+timeOffsetHeartRateSamples=>not found
+averageStressLevel=>最高壓力水平(1~25 26~50 51~75 76~100)
+maxStressLevel=>期間最大壓力水平
+stressDurationInSeconds=>在有壓力的狀況下的秒數(26~100)
+resStressDurationInSeconds=>無壓力狀況下的秒數(1~25)
+activityStressDurationInSeconds=>(未被分類的時間)
+lowStressDurationInSeconds=>壓力26~50的時間
+mediumStressDurationInSecond=>壓力51~75的時間
+highStressDurationInSeconds=>壓力76~100的時間
+stressQualifier=>壓力測量的標籤(用來排除未知值)
+stepsGoal=>期間的目標步數
+netKilocaloriesGoal=>consumedCalories-activeKilocalories
+
+intensityDurationGoallnSeconds=>目標秒數(激烈和中度運動)
+floorsClimbedGoal=>目標爬的樓層數
+
+
+
+Activity Summaries
+
+summaryId=>每一筆資料都不一樣的ID
+startTimeOnSeconds=>活動開始時間(1970/1/1/00:00:00UTC)
+startTimeOffsetInSeconds=>加到startTimeInSeconds變成本地時間
+activityType=>活動類型
+durationInSeconds=>監控週期(秒)
+averageHeartRateInBeatsPerMinute
+averageRUnCadenceInStepsPerMinutes
+averageSpeedInMetersPerSecond
+averagePacelInMinutesPerKilometer
+activeKilocalories
+deviceName=>特定的garmin設備
+disancelInMeters
+maxHeartRateInBeatsPerMinute
+maxPacelInMinutesPerkilometer
+maxRunCadencelInStepsPerMinute
+maxSpeedInMetersPerSecond
+steps
+
+Epoch Summaries
+
+summaryId
+startTimeInSeconds
+startTimeOffsetInSeconds
+activityType=>活動類型
+durationInSeconds=>監控時間
+activeTimeInSeconds=>配戴者活動狀態的總和時間
+steps=>步數
+distanceInMeters=>移動距離
+activeKilocalories=>監測期間消耗的卡路里(不包括基礎代謝率只包括活動消耗的卡路里)
+met=>metabolic Equivalent of Task(代謝當量)
+intensity=>運動強度
+meanMotionIntensity=>所有分鐘運動強度的平均值
+maxMotionIntensity=>最大運動強度
+
+Sleep Summaries
+
+summaryId
+celendarDate
+startTimeInSeconds
+startTomeOffsetInSeconds
+durationInSeconds=>監控期間(秒)
+unmmeasurableSleepInSeconds=>沒測到睡眠水平的時間
+deepSleepDurationInSeconds=>深度睡眠中度過的時間
+lightSleepDurationInSeconds=>淺度睡眠中度過的時間
+remSleepInSeconds=>REM睡眠中花費的時間
+awakeDurationInSeconds=>睡眠時間清醒的時機
+SleepLevelsMap=>睡眠光清醒時間等等
+validation
+timeOffsetSleepSpo2=>血氧飽和度
+健康人士在睡覺時的血氧飽和度可維持在90%或以上，而平均血氧飽和度則是約96%。前文提及的中國研究也有實驗數據顯示，阻礙性睡眠窒息症患者在在睡眠期間的最低血氧飽和度低於90%，與健康人士的指數相比有顯著的差別。若自行使用血氧監測儀於晚上睡眠期間量度數次，均出現最低血氧飽和度低於90%的情況，則代表患有睡眠窒息症的可能性很大，建議前往求醫再作詳細檢查
+
+
+
+
+
+各位同學好，
+Garmin資料的串接方式
+可以先將各個檔案的 ID 裡面的 dailies, epoch, sleep等字眼拿掉，就可以用來代表每一位user
+
+start-time-in-second 要先轉成 日期(例如欄位名稱為 date_new)  
+用來做 dailies 與 epoch 之串接
+用來做 dailies 與 (Sleep + sleepSO2 + LevelMap) 之串接
+
+
+接續
+
+Dailies 與 HR 會有相同的 summary ID 可以串接
+Sleep + sleepSO2 + LevelMap 會有相同的 summary ID 可以串接
+Dailies 與 Epoch 會有相同的 ID + date_new 可以串接
+Dailise 與 Sleep + sleepSO2 + LevelMap 會有相同的 ID + date_new  可以串接 
+
+大概如上說明
